@@ -8,6 +8,7 @@ public class MyLinkedList {
 		
 		
 		LinkedList ll = new LinkedList();
+		LinkedList ll2 = new LinkedList();
 		int ch;
 		Scanner s = new Scanner(System.in);
 		
@@ -25,8 +26,13 @@ public class MyLinkedList {
 			System.out.println("          8. Insert After");
 			System.out.println("          9. Delete Before");
 			System.out.println("         10. Delete After");
-			System.out.println("         11. Count Nodes");
-			System.out.println("         12. Display Linked List");
+			System.out.println("         11. Insert Sorted");
+			System.out.println("         12. Linked List Concat");
+			System.out.println("         13. Linked List Reverse");
+			System.out.println("         14. Count Nodes");
+			System.out.println("         15. Display Linked List");
+			System.out.println("         16. Alternate Concat");
+			System.out.println("         17. Even Odd Split");
 			System.out.println("          0. Exit");
 			System.out.println("==================================================================");
 			System.out.println();
@@ -40,6 +46,7 @@ public class MyLinkedList {
 					System.out.print("Enter Data to Enter : ");
 					int d = s.nextInt();
 					ll.insertFirst(d);
+					//ll2.insertLast(d);
 					break;
 				}
 				case 2:
@@ -126,16 +133,65 @@ public class MyLinkedList {
 				}
 				case 11:
 				{
-					System.out.println("--------------------------------------------------------------");
-					System.out.println("Total No of Nodes : "+ll.countNode());
-					System.out.println("--------------------------------------------------------------");
+					System.out.println();
+					System.out.print("Enter data to enter : ");
+					int d = s.nextInt();
+					ll.insertSorted(d);
 					break;
 				}
 				case 12:
 				{
 					System.out.println("--------------------------------------------------------------");
-					System.out.println(ll.displayList());
+					int choice;
+					do {
+						System.out.print("Enter Data to enter into Second Linked List : ");
+						int d = s.nextInt();
+						ll2.insertLast(d);
+						System.out.println();
+						System.out.println("Inserted Successfully");
+						System.out.println();
+						System.out.println("Do yo want to enter another data  : yes(1) No(0) ");
+						choice = s.nextInt();
+					}while(choice != 0);
 					System.out.println("--------------------------------------------------------------");
+					LinkedList LL;
+					LL = ll.concat(ll2);
+					System.out.println(LL.displayList());
+					System.out.println("--------------------------------------------------------------");
+					break;
+				}
+				case 13:
+				{
+					System.out.println("--------------------------------------------------------------");
+					ll.reverse();
+					System.out.println("LinkedList Reverse Successfully");
+					System.out.println("--------------------------------------------------------------");
+					break;
+				}
+				case 14:
+				{
+					System.out.println("--------------------------------------------------------------");
+					System.out.println("Total No of Nodes : "+ll.countNode());
+					System.out.println("--------------------------------------------------------------");
+					break;
+				}
+				case 15:
+				{
+					System.out.println("--------------------------------------------------------------");
+					System.out.println(ll.displayList());
+					System.out.println(ll2.displayList());
+					System.out.println("--------------------------------------------------------------");
+					break;
+				}
+				case 16:
+				{
+					LinkedList LL = ll.concatAlt(ll2);
+					System.out.println(LL.displayList());
+					break;
+				}
+				case 17:
+				{
+					ll.spiltEO();
 					break;
 				}
 				case 0:
