@@ -10,6 +10,17 @@ public class LinkedList
 		head = null;
 	}
 	
+	
+	public IntNode getHead() {
+		return head;
+	}
+
+
+	public void setHead(IntNode head) {
+		this.head = head;
+	}
+
+
 	public void insertFirst(int d)
 	{
 		IntNode new_node = new IntNode(d);
@@ -292,15 +303,140 @@ public class LinkedList
 		return cnt;
 	}
 	
+	public void insertSorted(int d)
+	{
+		IntNode new_node = new IntNode(d);
+		
+		if(head == null || head.getData() > d)
+		{
+			new_node.setNext(head);
+			head = new_node;
+			return;
+		}
+		
+		IntNode itr = head;
+		while(itr.getNext() != null && itr.getNext().getData() < d)
+		{
+			itr = itr.getNext();
+		}
+		
+		new_node.setNext(itr.getNext());
+		itr.setNext(new_node);
+		return;
+	}
+	
+	public LinkedList concat(LinkedList ll2)
+	{
+		LinkedList res = new LinkedList();
+		IntNode itr = head;
+		
+		while(itr != null)
+		{
+			res.insertLast(itr.getData());
+			itr = itr.getNext();
+		}
+	//	res.insertLast(itr.getData());
+		
+		itr = ll2.getHead();
+		while(itr != null)
+		{
+			res.insertLast(itr.getData());
+			itr = itr.getNext();
+		}
+		return res;
+	}
+	
+	public LinkedList concatAlt(LinkedList ll2)
+	{
+		LinkedList res = new LinkedList();
+		IntNode itr1 = head;
+		IntNode itr2 = ll2.getHead();
+		
+		while(itr1 != null || itr2 != null)
+		{
+			if(itr1 != null) {
+				res.insertLast(itr1.getData());
+				itr1 = itr1.getNext();
+			}
+			if(itr2 != null) {
+				res.insertLast(itr2.getData());
+				itr2 = itr2.getNext();
+			}
+		}
+		
+		return res;
+	}
+	
+	public void spiltEO()
+	{
+		LinkedList even = new LinkedList();
+		LinkedList odd = new LinkedList();
+		IntNode itr = head;
+		while(itr.getNext() != null)
+		{
+			if(itr.getData() % 2 == 0)
+			{
+				even.insertLast(itr.getData());
+				itr = itr.getNext();
+			}
+			
+			else
+			{
+				odd.insertLast(itr.getData());
+				itr = itr.getNext(); 
+			}
+			
+		}
+		if(itr.getData() % 2 == 0)
+		{
+			even.insertLast(itr.getData());
+		
+		}
+		
+		else
+		{
+			odd.insertLast(itr.getData());
+		 
+		}
+		
+		System.out.println("Even LinkedList : "+even.displayList());
+		System.out.println("Odd LinkedList : "+odd.displayList());
+	}
+	
+	public void reverse()
+	{
+		IntNode curr, prev, next;
+		prev = null;
+		curr = head;
+		
+		while(curr != null)
+		{
+			next = curr.getNext();
+			curr.setNext(prev);
+			prev = curr;
+			curr = next;
+		}
+		
+		head = prev;
+		return;
+	}
+	
 	public String displayList()
 	{
 		String str = "LinkedList :";
 		IntNode itr = head;
+		
+		if(itr == null)
+		{
+			str = "LinkedList is Empty";
+			return str;
+		}
 		while(itr != null)
 		{
 			str = str+" "+itr.getData();
 			itr = itr.getNext();
 		}
+
 		return str;
 	}
 
